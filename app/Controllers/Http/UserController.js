@@ -30,7 +30,6 @@ class UserController {
 
     async update({params,request,response}){
         const user = await User.find(params.id);
-
         if(user){
             user.merge(request.only(['nome','email','endereco','telefone','password']));
             user.save();
@@ -40,9 +39,7 @@ class UserController {
 
     async delete({params,auth,request,response}){
         const user = await User.findOrFail(params.id);
-
         await user.delete();
-
         return response.status(200).json(user);
     }
 
