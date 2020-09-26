@@ -9,6 +9,7 @@ class TelefoneSchema extends Schema {
       table.string('ddd', 3).notNullable()
       table.string('numero-telefone', 10).notNullable()
       table.string('id -user', 254).notNullable()
+      table.timestamps()
     })
   }
 

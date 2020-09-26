@@ -12,6 +12,7 @@ class EnderecoSchema extends Schema {
       table.string('cidade', 254).notNullable()
       table.string('logradouro', 254).notNullable()
       table.string('id-user', 254).notNullable()
+      table.timestamps()
     })
   }
 
