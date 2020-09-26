@@ -22,4 +22,4 @@ Route.group(() => {
     Route.get('exibirUsuarios','UserController.index');
     Route.delete('delete/:id','UserController.delete');
     Route.put('update/:id','UserController.update');
-}).prefix('users')
+}).prefix('api')
