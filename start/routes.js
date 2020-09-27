@@ -22,4 +22,14 @@ Route.group(() => {
     Route.get('exibirUsuarios','UserController.index');
     Route.delete('delete/:id','UserController.delete');
     Route.put('update/:id','UserController.update');
+
+    Route.post('cadastrarEndereco','UserController.cadastrarEndereco');
+    Route.get('exibirEnderecos','UserController.indexEndereco');
+    Route.delete('deleteEndereco/:id','UserController.deleteEndereco');
+    Route.put('updateEndereco/:id','UserController.upadateEndereco');
+
+    Route.post('cadastrarTelefone','UserController.cadastrarTelefone');
+    Route.get('exibirTelefones','UserController.indexTelefone');
+    Route.delete('deleteTelefone/:id','UserController.deleteTelefone');
+    Route.put('updateTelefone/:id','UserController.upadateTelefone');
 }).prefix('api')

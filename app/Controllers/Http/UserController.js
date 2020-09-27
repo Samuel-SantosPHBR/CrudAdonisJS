@@ -3,7 +3,6 @@
 const User = use('App/Models/User')
 const Telefone = use('App/Models/Telefone')
 const Endereco = use('App/Models/Endereco')
-
 class UserController {
     //função para realizar o login
     async login({request,response,auth}){
@@ -45,46 +44,64 @@ class UserController {
         return response.status(200).json(user);
     }
 
-    //funcções para os models
-
-    async cadastrarTelefone({request,response,auth}){
-        const {ddd,numeroTelefone} = request.only(['ddd','numero-telefone']);
-        await Telefone.create(ddd,numeroTelefone,auth.user.id);
-        return response.json(Telefone);
-    }
-
-    async indexTelefone({response}){
-        const telefone = await Telefone.all();
-        return response.json(telefone);
-    }
-
-    async upadateTelefone({params,request,response}){
-
-    }
-
-    async deleteTelefone({params,auth,request,response}){
-
-    }
-
-    //
-
-    async cadastrarEndereco({request,response,auth}){
+    async cadastrarEndereco({request,auth}){
         const {cep,bairro,estado,cidade,logradouro} = request.only(['cep','bairro','estado','cidade','logradouro']);
-        await Endereco.create(cep,bairro,estado,cidade,logradouro,auth.user.id);
-        return response.json(Telefone);
+        const endereco = await Endereco.create({user_id:auth.user.id,cep:cep,bairro:bairro,estado:estado,cidade:cidade,logradouro:logradouro});
+        return endereco;
     }
 
-    async indexEndereco({response}){
-        const endereco = await Endereco.all();
+    async indexEndereco({response,auth}){
+        const endereco = await Endereco.query().where('user_id','=',auth.user.id).fetch();
         return response.json(endereco);
     }
 
-    async upadateEndereco({params,request,response}){
-
+    async upadateEndereco({auth,params,request,response}){
+        const endereco = await Endereco.find(params.id);
+        if(endereco.user_id==auth.user.id){
+            endereco.merge(request.only(['cep','bairro','estado','cidade','logradouro']));
+            endereco.save();
+            return endereco;
+        }
+        return response.status(200).json(endereco);
     }
 
-    async deleteEndereco({params,auth,request,response}){
+    async deleteEndereco({params,auth,response}){
+        const endereco = await Endereco.findOrFail(params.id);
+        if(endereco.user_id==auth.user.id){
+            await endereco.delete();
+            return response.status(200).json(endereco);
+        }
+        return response.status(200).json(endereco);
+    }
 
+    async cadastrarTelefone({request,auth}){
+        const {ddd,numero_telefone} = request.only(['ddd','numero_telefone']);
+        const telefone = await Telefone.create({user_id:auth.user.id,ddd:ddd,numero_telefone:numero_telefone});
+        return telefone;
+    }
+
+    async indexTelefone({response,auth}){
+        const telefone = await Telefone.query().where('user_id','=',auth.user.id).fetch();
+        return response.json(telefone);
+    }
+
+    async upadateTelefone({auth,params,request,response}){
+        const telefone = await Telefone.find(params.id);
+        if(telefone.user_id==auth.user.id){
+            telefone.merge(request.only(['ddd','numero_telefone']));
+            telefone.save();
+            return telefone;
+        }
+        return response.status(200).json(telefone);
+    }
+
+    async deleteTelefone({params,auth,response}){
+        const telefone = await Telefone.findOrFail(params.id);
+        if(telefone.user_id==auth.user.id){
+            await telefone.delete();
+            return telefone;
+        }
+        return response.status(200).json(telefone);
     }
 }
 

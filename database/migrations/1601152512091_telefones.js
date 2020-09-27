@@ -6,9 +6,10 @@ const Schema = use('Schema')
 class TelefoneSchema extends Schema {
   up () {
     this.create('telefones', (table) => {
-      table.string('ddd', 3).notNullable()
-      table.string('numero-telefone', 10).notNullable()
-      table.string('id -user', 254).notNullable()
+      table.increments();
+      table.integer('user_id').unsigned().notNullable().references('id').inTable('users').onUpdate("CASCADE").onDelete("CASCADE");
+      table.string('ddd', 10).notNullable()
+      table.string('numero_telefone', 10).notNullable()
       table.timestamps()
     })
   }
