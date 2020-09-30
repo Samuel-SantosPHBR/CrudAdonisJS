@@ -13,12 +13,10 @@ class UserController {
 
     //função apra fazer o cadastro do usuario
     async cadastrar({request,response}){
-        const {nome,email,endereco,telefone,password} = request.only(['nome','email','endereco','telefone','password']);
+        const {nome,email,password} = request.only(['nome','email','password']);
         await User.create({
             nome,
             email,
-            endereco,
-            telefone,
             password
         });
         return response.send({message: "Usuario cadastrado com sucesso"})
@@ -32,7 +30,7 @@ class UserController {
     async update({params,request,response}){
         const user = await User.find(params.id);
         if(user){
-            user.merge(request.only(['nome','email','endereco','telefone','password']));
+            user.merge(request.only(['nome','email','password']));
             user.save();
         }
         return response.status(200).json(user);

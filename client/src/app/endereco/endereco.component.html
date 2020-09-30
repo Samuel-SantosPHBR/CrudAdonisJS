@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-5 mx-auto">
+            <form (submit)="register()">
+                <h1 class="h3 mb-3 font-weight-normal text-center">Cadastrar Endereço</h1>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="cep">CEP:</label>
+                        <input type="number" class="form-control" name="cep" placeholder="Digite um CEP" [(ngModel)]="credentials.cep">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="bairro">Bairro:</label>
+                        <input type="text" class="form-control" name="bairro" placeholder="Digite um Bairro" [(ngModel)]="credentials.bairro">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="estado">Estado:</label>
+                        <input type="text" class="form-control" name="estado" placeholder="Digite um Estado" [(ngModel)]="credentials.estado">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" class="form-control" name="cidade" placeholder="Digite uma Cidade" [(ngModel)]="credentials.cidade">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="logradouro">Logradouro:</label>
+                    <input type="text" class="form-control" name="logradouro" placeholder="Digite um Logradouro" [(ngModel)]="credentials.logradouro">
+                </div>
+                
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+    <table class="table mt-5 mt-">
+        <thead>
+            <tr><th>Cep:</th><th>Bairro:</th><th>Estado:</th><th>Cidade:</th><th>Logradouro:</th><th class="text-right">Deletar:</th></tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let endereco of enderecos">
+                <td class="text-left">
+                    <a (click)="edit(endereco)">
+                        <span *ngIf="endereco!==editEndereco">{{endereco.cep}}</span>
+                        <input class="form-control" *ngIf="endereco===editEndereco" [(ngModel)]="endereco.cep" (blur)="update()" (keyup.enter)="update()" />
+                    </a> 
+                </td>
+                <td class="text-left">
+                    <a (click)="edit(endereco)">
+                        <span *ngIf="endereco!==editEndereco">{{endereco.bairro}}</span>
+                        <input class="form-control" *ngIf="endereco===editEndereco" [(ngModel)]="endereco.bairro" (blur)="update()" (keyup.enter)="update()" />
+                    </a>
+                </td>
+                <td class="text-left">
+                    <a (click)="edit(endereco)">
+                        <span *ngIf="endereco!==editEndereco">{{endereco.estado}}</span>
+                        <input class="form-control" *ngIf="endereco===editEndereco" [(ngModel)]="endereco.estado" (blur)="update()" (keyup.enter)="update()" />
+                    </a>
+                </td>
+                <td class="text-left">
+                    <a (click)="edit(endereco)">
+                        <span *ngIf="endereco!==editEndereco">{{endereco.cidade}}</span>
+                        <input class="form-control" *ngIf="endereco===editEndereco" [(ngModel)]="endereco.cidade" (blur)="update()" (keyup.enter)="update()" />
+                    </a>
+                </td>
+                <td class="text-left">
+                    <a (click)="edit(endereco)">
+                        <span *ngIf="endereco!==editEndereco">{{endereco.logradouro}}</span>
+                        <input class="form-control" *ngIf="endereco===editEndereco" [(ngModel)]="endereco.logradouro" (blur)="update()" (keyup.enter)="update()" />
+                    </a>
+                </td>
+                <td class="text-right">
+                    <button class="btn btn-danger" (click)="delete(endereco)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col-md-6 mt-5 mx-auto">
+        <p class=" mb-3 font-weight-normal text-center">Para editar selecione o dado que deseja ser editado.</p>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-5 mx-auto">
+            <form (submit)="register()">
+                <h1 class="h3 mb-3 font-weight-normal text-center">Cadastrar Telefone</h1>
+                <div class="form-group">
+                    <label for="ddd">DDD:</label>
+                    <input type="number" class="form-control" name="ddd" placeholder="Digite seu DDD" [(ngModel)]="credentials.ddd" required mask="9999990*.99">
+                </div>
+                <div class="form-group">
+                    <label for="numero_telefon">Telefone:</label>
+                    <input type="number" class="form-control" name="numero_telefone" placeholder="Digite seu Email" [(ngModel)]="credentials.numero_telefone" required>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+    <table class="table mt-5 mt-">
+        <thead>
+            <tr><th>DDD:</th><th>Numero:</th><th class="text-right">Deletar:</th></tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let telefone of telefones">
+                <td class="text-left">
+                    <a (click)="edit(telefone)">
+                        <span *ngIf="telefone!==editTelefone">{{telefone.ddd}}</span>
+                        <input class="form-control" name="ddd" required #ddd="ngModel" *ngIf="telefone===editTelefone" [(ngModel)]="telefone.ddd" (blur)="update()" (keyup.enter)="update()" />
+
+                    </a>
+                    
+                </td>
+                <td class="text-left">
+                    <a (click)="edit(telefone)">
+                        <span *ngIf="telefone!==editTelefone">{{telefone.numero_telefone}}</span>
+                        <input class="form-control"  *ngIf="telefone===editTelefone" [(ngModel)]="telefone.numero_telefone" (blur)="update()" (keyup.enter)="update()" />
+                    </a>
+                </td>
+                <td class="text-right">
+                    <button class="btn btn-danger" (click)="delete(telefone)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col-md-6 mt-5 mx-auto">
+        <p class=" mb-3 font-weight-normal text-center">Para editar selecione o dado que deseja ser editado.</p>
+    </div>
+</div>
