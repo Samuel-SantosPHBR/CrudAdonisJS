@@ -1,32 +1,17 @@
-# Adonis fullstack application
+# Sobre o Projeto
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+Projeto Adonis de Crud com uma interface feita utilizando o Angular, para fazer cadastro e Login de Usuarios.
 
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
+# Tecnologias
 
-## Setup
+Adonis.
+Angular.
+MySql.
 
-Use the adonis command to install the blueprint
+# Como utilizar
 
-```bash
-adonis new yardstick
-```
+Ulilize o comando ' adonis serve --dev ' para executar o Adonis.
 
-or manually clone the repo and then run `npm install`.
+Dntro da pasta do Adonis utilize o commando ' adonis migration:run ' para importar o Database.
 
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
-```
-Versão 0.2
+Dentro da pasta do Crud Adonis está a pagina Client que contem o angular, para executar utilize o ' npm start '.
