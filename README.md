@@ -7,7 +7,7 @@ Projeto Adonis de Crud com uma interface Grafica feita utilizando o Angular, par
 Adonis.
 Angular.
 MySql.
-Bootstrap em sua vertsão 4.
+Bootstrap em sua versão 4.
 Jquery - junto a instalação do bootstrap.
 
 # Como utilizar
